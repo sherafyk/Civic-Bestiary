@@ -1,0 +1,608 @@
+{
+  "schema": "american-civic-bestiary-question-pack-v1",
+  "pack": "core_v1",
+  "questions": [
+    {
+      "question_key": "q01_hospital_network",
+      "prompt": "A hospital network is the only major provider in a region. Prices are rising, staffing is strained, executives blame labor costs, nurses blame management, patients blame insurers, and local officials say state law limits their options. What should be investigated first?",
+      "context": "Choose the first response that feels most civically responsible under pressure.",
+      "question_type": "single_choice",
+      "required": true,
+      "active": true,
+      "pack": "core_v1",
+      "domain": "public_goods",
+      "role": "anchor",
+      "sort_order": 10,
+      "options": [
+        {
+          "option_key": "audit_contracts",
+          "label": "Audit ownership, contracts, payer arrangements, executive incentives, and political influence before prescribing a fix.",
+          "dimension_scores": { "skepticism": 2, "pragmatism": 2, "reform": 1 },
+          "animal_scores": { "raccoon": 2, "bat": 1, "badger": 1 },
+          "updown_scores": { "traceability": 2, "institutional_causality": 2, "disclosure_preference": 1 }
+        },
+        {
+          "option_key": "public_standards",
+          "label": "Strengthen public oversight, require transparent performance standards, and build capacity to enforce them.",
+          "dimension_scores": { "order": 1, "pragmatism": 2, "equality": 1, "reform": 1 },
+          "animal_scores": { "beaver": 2, "badger": 1, "bison": 1 },
+          "updown_scores": { "disclosure_preference": 1, "reform_literacy": 1 }
+        },
+        {
+          "option_key": "break_monopoly",
+          "label": "Break up monopoly power and let patients, workers, and smaller providers escape the captured market.",
+          "dimension_scores": { "liberty": 2, "reform": 2, "localism": 1, "skepticism": 1 },
+          "animal_scores": { "fox": 2, "moose": 1, "coyote": 1 },
+          "updown_scores": { "institutional_causality": 1, "reform_literacy": 2 }
+        },
+        {
+          "option_key": "access_first",
+          "label": "Guarantee patient access first, then fight over the financing and ownership structure after people are safe.",
+          "dimension_scores": { "solidarity": 2, "equality": 2, "order": 1 },
+          "animal_scores": { "bison": 2, "wolf": 1, "otter": 1 },
+          "updown_scores": { "institutional_causality": 1 }
+        },
+        {
+          "option_key": "local_redesign",
+          "label": "Let local residents, county officials, nurses, and nearby employers redesign the regional system.",
+          "dimension_scores": { "localism": 2, "solidarity": 1, "pragmatism": 1 },
+          "animal_scores": { "moose": 2, "dog": 1, "beaver": 1 },
+          "updown_scores": { "traceability": 1 }
+        },
+        {
+          "option_key": "strategic_infrastructure",
+          "label": "Treat health care as strategic national infrastructure and reduce dependency on fragile private middlemen.",
+          "dimension_scores": { "sovereignty": 2, "order": 1, "solidarity": 1, "pragmatism": 1 },
+          "animal_scores": { "bear": 2, "whale": 1, "bison": 1 },
+          "updown_scores": { "institutional_causality": 1, "reform_literacy": 1 }
+        }
+      ]
+    },
+    {
+      "question_key": "q02_emergency_powers",
+      "prompt": "A fast-moving disaster requires coordination across several states. Officials want emergency powers that could bypass ordinary procurement, movement, and privacy rules. What guardrail matters most?",
+      "context": "This item separates order, liberty, procedure, and implementation instincts.",
+      "question_type": "single_choice",
+      "required": true,
+      "active": true,
+      "pack": "core_v1",
+      "domain": "crisis_governance",
+      "role": "anchor",
+      "sort_order": 20,
+      "options": [
+        {
+          "option_key": "sunset_review",
+          "label": "Use temporary powers only with a statutory sunset, public logs, and after-action review.",
+          "dimension_scores": { "order": 1, "liberty": 1, "pragmatism": 2, "reform": 1 },
+          "animal_scores": { "beaver": 2, "badger": 2, "bat": 1 },
+          "updown_scores": { "disclosure_preference": 2, "institutional_causality": 1 }
+        },
+        {
+          "option_key": "command_first",
+          "label": "Centralize command quickly so responders can act before delay costs lives.",
+          "dimension_scores": { "order": 2, "pragmatism": 1, "sovereignty": 1, "liberty": -1 },
+          "animal_scores": { "wolf": 2, "bear": 1, "beaver": 1 },
+          "updown_scores": { "reform_literacy": 0.5 }
+        },
+        {
+          "option_key": "rights_boundary",
+          "label": "Define privacy, speech, movement, and due-process boundaries before powers expand.",
+          "dimension_scores": { "liberty": 2, "skepticism": 1, "order": 1 },
+          "animal_scores": { "fox": 2, "badger": 2, "raccoon": 1 },
+          "updown_scores": { "cross_partisan_consistency": 1, "disclosure_preference": 1 }
+        },
+        {
+          "option_key": "local_compact",
+          "label": "Create a state-local compact where federal logistics support must be requested and documented.",
+          "dimension_scores": { "localism": 2, "sovereignty": 1, "pragmatism": 1 },
+          "animal_scores": { "moose": 2, "bear": 1, "dog": 1 },
+          "updown_scores": { "traceability": 1 }
+        },
+        {
+          "option_key": "public_dashboard",
+          "label": "Publish dashboards showing needs, contracts, delivery gaps, and error rates in real time.",
+          "dimension_scores": { "pragmatism": 2, "skepticism": 1, "reform": 1 },
+          "animal_scores": { "bat": 2, "beaver": 1, "raccoon": 1 },
+          "updown_scores": { "traceability": 2, "disclosure_preference": 2, "narrative_skepticism": 1 }
+        }
+      ]
+    },
+    {
+      "question_key": "q03_platform_pressure",
+      "prompt": "Government officials are pressuring major platforms to reduce dangerous misinformation. Civil-liberties groups warn that informal pressure can become censorship without accountability. Where do you start?",
+      "context": "The scenario tests liberty, order, pluralism, skepticism, and procedural instincts.",
+      "question_type": "single_choice",
+      "required": true,
+      "active": true,
+      "pack": "core_v1",
+      "domain": "speech_information",
+      "role": "anchor",
+      "sort_order": 30,
+      "options": [
+        {
+          "option_key": "public_rules",
+          "label": "Require all government-platform requests to be logged, appealable, and governed by public rules.",
+          "dimension_scores": { "liberty": 2, "order": 1, "pragmatism": 1, "skepticism": 1 },
+          "animal_scores": { "badger": 2, "fox": 2, "bat": 1 },
+          "updown_scores": { "disclosure_preference": 2, "traceability": 1, "cross_partisan_consistency": 1 }
+        },
+        {
+          "option_key": "harm_reduction",
+          "label": "Prioritize rapid harm reduction while making sure no group is permanently silenced.",
+          "dimension_scores": { "order": 1, "solidarity": 1, "pluralism": 1, "pragmatism": 1 },
+          "animal_scores": { "otter": 2, "wolf": 1, "bison": 1 },
+          "updown_scores": { "institutional_causality": 0.5 }
+        },
+        {
+          "option_key": "no_backchannels",
+          "label": "Ban backchannel pressure entirely; speech rules should be set by law, courts, and user choice.",
+          "dimension_scores": { "liberty": 2, "skepticism": 2, "reform": 1 },
+          "animal_scores": { "fox": 2, "wild_horse": 1, "badger": 1 },
+          "updown_scores": { "cross_partisan_consistency": 1, "disclosure_preference": 1 }
+        },
+        {
+          "option_key": "algorithm_audit",
+          "label": "Audit amplification systems, ad incentives, and platform ownership before focusing on individual posts.",
+          "dimension_scores": { "skepticism": 2, "pragmatism": 2, "reform": 1 },
+          "animal_scores": { "bat": 2, "raccoon": 2, "beaver": 1 },
+          "updown_scores": { "narrative_skepticism": 2, "traceability": 2, "institutional_causality": 1 }
+        },
+        {
+          "option_key": "civic_norms",
+          "label": "Invest in media literacy, cross-viewpoint habits, and civic trust so platforms are not the only defense.",
+          "dimension_scores": { "pluralism": 2, "solidarity": 1, "pragmatism": 1 },
+          "animal_scores": { "otter": 2, "dog": 1, "dolphin": 1 },
+          "updown_scores": { "narrative_skepticism": 1 }
+        }
+      ]
+    },
+    {
+      "question_key": "q04_dark_money",
+      "prompt": "A popular reform campaign is being funded through nonprofits and shell entities. Its goals may be good, but the funding trail is opaque. How should citizens respond?",
+      "context": "The Bestiary treats transparency as a cross-partisan discipline.",
+      "question_type": "single_choice",
+      "required": true,
+      "active": true,
+      "pack": "core_v1",
+      "domain": "capture_literacy",
+      "role": "anchor",
+      "sort_order": 40,
+      "options": [
+        {
+          "option_key": "same_standard",
+          "label": "Demand disclosure even if the campaign supports policies I like.",
+          "dimension_scores": { "skepticism": 2, "pragmatism": 1, "liberty": 1 },
+          "animal_scores": { "raccoon": 2, "badger": 2, "fox": 1 },
+          "updown_scores": { "cross_partisan_consistency": 2, "disclosure_preference": 2, "traceability": 1 }
+        },
+        {
+          "option_key": "outcomes_first",
+          "label": "Judge the policy mainly on whether it helps people, while noting the funding concern.",
+          "dimension_scores": { "solidarity": 2, "equality": 1, "pragmatism": 1, "skepticism": -1 },
+          "animal_scores": { "bison": 2, "otter": 1, "beaver": 1 },
+          "updown_scores": { "cross_partisan_consistency": 0.5 }
+        },
+        {
+          "option_key": "ban_shells",
+          "label": "Ban shell-entity spending and require real-time donor and beneficial-ownership disclosure.",
+          "dimension_scores": { "reform": 2, "skepticism": 2, "order": 1 },
+          "animal_scores": { "raccoon": 2, "coyote": 1, "badger": 1 },
+          "updown_scores": { "disclosure_preference": 2, "traceability": 2, "reform_literacy": 2 }
+        },
+        {
+          "option_key": "local_vetting",
+          "label": "Let local civic groups and community institutions vet whether the campaign is trustworthy.",
+          "dimension_scores": { "localism": 2, "solidarity": 1, "tradition": 1 },
+          "animal_scores": { "dog": 2, "moose": 1, "ox": 1 },
+          "updown_scores": { "traceability": 1 }
+        },
+        {
+          "option_key": "party_machine",
+          "label": "Treat opaque funding as another sign that the party and consultant machines need to be broken open.",
+          "dimension_scores": { "reform": 2, "skepticism": 2, "liberty": 1 },
+          "animal_scores": { "wild_horse": 2, "coyote": 2, "raccoon": 1 },
+          "updown_scores": { "narrative_skepticism": 1, "reform_literacy": 1 }
+        }
+      ]
+    },
+    {
+      "question_key": "q05_school_conflict",
+      "prompt": "A local school district is locked in a bitter fight over curriculum, parent rights, teacher autonomy, and student inclusion. Outside advocacy groups are flooding the race with money. What matters most?",
+      "context": "This item tests localism, pluralism, tradition, equality, and capture awareness.",
+      "question_type": "single_choice",
+      "required": true,
+      "active": true,
+      "pack": "core_v1",
+      "domain": "community_institutions",
+      "role": "anchor",
+      "sort_order": 50,
+      "options": [
+        {
+          "option_key": "local_deliberation",
+          "label": "Return the dispute to transparent local deliberation with parents, teachers, and students in the room.",
+          "dimension_scores": { "localism": 2, "pluralism": 1, "solidarity": 1, "pragmatism": 1 },
+          "animal_scores": { "moose": 2, "dog": 2, "otter": 1 },
+          "updown_scores": { "traceability": 1, "narrative_skepticism": 1 }
+        },
+        {
+          "option_key": "protect_inclusion",
+          "label": "Protect vulnerable students first; a school must not become hostile to equal dignity.",
+          "dimension_scores": { "equality": 2, "pluralism": 2, "solidarity": 1 },
+          "animal_scores": { "bison": 2, "otter": 2, "dolphin": 1 },
+          "updown_scores": { "cross_partisan_consistency": 0.5 }
+        },
+        {
+          "option_key": "protect_inheritance",
+          "label": "Preserve family authority, inherited civic norms, and community continuity against rapid ideological swings.",
+          "dimension_scores": { "tradition": 2, "localism": 1, "order": 1 },
+          "animal_scores": { "ox": 2, "dog": 1, "bear": 1 },
+          "updown_scores": { "narrative_skepticism": 0.5 }
+        },
+        {
+          "option_key": "money_trail",
+          "label": "Expose outside funders, national PAC messaging, consultant scripts, and astroturf operations on every side.",
+          "dimension_scores": { "skepticism": 2, "reform": 1, "localism": 1 },
+          "animal_scores": { "raccoon": 2, "wild_horse": 1, "moose": 1 },
+          "updown_scores": { "traceability": 2, "cross_partisan_consistency": 2, "narrative_skepticism": 2 }
+        },
+        {
+          "option_key": "rules_for_conflict",
+          "label": "Set rules for curriculum review, viewpoint diversity, evidence standards, and appeal rights.",
+          "dimension_scores": { "order": 1, "pluralism": 1, "pragmatism": 2, "liberty": 1 },
+          "animal_scores": { "badger": 2, "beaver": 1, "otter": 1 },
+          "updown_scores": { "reform_literacy": 1, "disclosure_preference": 1 }
+        }
+      ]
+    },
+    {
+      "question_key": "q06_supply_chain",
+      "prompt": "A critical medicine depends on overseas production, fragile shipping routes, and a few dominant distributors. Prices spike after a geopolitical crisis. What should the country do?",
+      "context": "This scenario separates sovereignty, markets, global coordination, and long-term stewardship.",
+      "question_type": "single_choice",
+      "required": true,
+      "active": true,
+      "pack": "core_v1",
+      "domain": "sovereignty_markets",
+      "role": "anchor",
+      "sort_order": 60,
+      "options": [
+        {
+          "option_key": "domestic_capacity",
+          "label": "Build domestic production capacity for critical goods even if it costs more in normal times.",
+          "dimension_scores": { "sovereignty": 2, "order": 1, "pragmatism": 1 },
+          "animal_scores": { "bear": 2, "wolf": 1, "whale": 1 },
+          "updown_scores": { "institutional_causality": 1, "reform_literacy": 1 }
+        },
+        {
+          "option_key": "allied_resilience",
+          "label": "Create allied supply compacts with transparent stockpiles, shared standards, and crisis triggers.",
+          "dimension_scores": { "globalism": 2, "pragmatism": 2, "order": 1 },
+          "animal_scores": { "dolphin": 2, "whale": 2, "beaver": 1 },
+          "updown_scores": { "traceability": 1, "disclosure_preference": 1 }
+        },
+        {
+          "option_key": "competition_exit",
+          "label": "Remove regulatory barriers that block new suppliers and patient exit from dominant distributors.",
+          "dimension_scores": { "liberty": 2, "reform": 1, "pragmatism": 1 },
+          "animal_scores": { "fox": 2, "moose": 1, "bat": 1 },
+          "updown_scores": { "reform_literacy": 1 }
+        },
+        {
+          "option_key": "public_guarantee",
+          "label": "Guarantee access to essential medicine and treat supply failure as a public-goods problem.",
+          "dimension_scores": { "solidarity": 2, "equality": 2, "order": 1 },
+          "animal_scores": { "bison": 2, "beaver": 1, "wolf": 1 },
+          "updown_scores": { "institutional_causality": 1 }
+        },
+        {
+          "option_key": "contract_audit",
+          "label": "Audit distributors, patents, contracts, and lobbying before deciding whether scarcity is real or engineered.",
+          "dimension_scores": { "skepticism": 2, "pragmatism": 2, "reform": 1 },
+          "animal_scores": { "raccoon": 2, "bat": 2, "badger": 1 },
+          "updown_scores": { "traceability": 2, "institutional_causality": 2 }
+        }
+      ]
+    },
+    {
+      "question_key": "q07_public_safety",
+      "prompt": "A city is facing rising disorder, business closures, resident fear, and credible reports of misconduct inside public-safety agencies. What is the right first principle?",
+      "context": "The point is not to choose a party line; it is to choose the instinct you protect first.",
+      "question_type": "single_choice",
+      "required": true,
+      "active": true,
+      "pack": "core_v1",
+      "domain": "public_order",
+      "role": "anchor",
+      "sort_order": 70,
+      "options": [
+        {
+          "option_key": "safety_real",
+          "label": "Public order must become real again; vulnerable residents cannot be asked to endure chaos.",
+          "dimension_scores": { "order": 2, "solidarity": 1, "pragmatism": 1 },
+          "animal_scores": { "wolf": 2, "bear": 1, "bison": 1 },
+          "updown_scores": { "institutional_causality": 0.5 }
+        },
+        {
+          "option_key": "accountable_force",
+          "label": "Enforcement must expand only with independent oversight, misconduct data, and due-process safeguards.",
+          "dimension_scores": { "order": 1, "liberty": 1, "pragmatism": 2, "skepticism": 1 },
+          "animal_scores": { "badger": 2, "beaver": 1, "fox": 1 },
+          "updown_scores": { "disclosure_preference": 2, "traceability": 1 }
+        },
+        {
+          "option_key": "root_causes",
+          "label": "Stabilize housing, treatment, employment, and community networks so safety is not only coercion.",
+          "dimension_scores": { "solidarity": 2, "equality": 2, "localism": 1 },
+          "animal_scores": { "bison": 2, "dog": 1, "otter": 1 },
+          "updown_scores": { "institutional_causality": 1 }
+        },
+        {
+          "option_key": "security_rackets",
+          "label": "Follow the money around overtime, contracts, jails, unions, procurement, and political incentives.",
+          "dimension_scores": { "skepticism": 2, "reform": 1, "pragmatism": 1 },
+          "animal_scores": { "raccoon": 2, "bat": 1, "coyote": 1 },
+          "updown_scores": { "traceability": 2, "institutional_causality": 2, "disclosure_preference": 1 }
+        },
+        {
+          "option_key": "neighborhood_capacity",
+          "label": "Rebuild neighborhood institutions so residents, not only agencies, can set and maintain norms.",
+          "dimension_scores": { "localism": 2, "solidarity": 2, "tradition": 1 },
+          "animal_scores": { "dog": 2, "moose": 1, "ox": 1 },
+          "updown_scores": { "reform_literacy": 0.5 }
+        }
+      ]
+    },
+    {
+      "question_key": "q08_long_term_risk",
+      "prompt": "A region keeps underinvesting in water, grid resilience, wildfire prevention, and maintenance because the costs are politically unpopular. What argument is most persuasive?",
+      "context": "This item maps long-view stewardship, institutional building, and present-day solidarity.",
+      "question_type": "single_choice",
+      "required": true,
+      "active": true,
+      "pack": "core_v1",
+      "domain": "long_term_governance",
+      "role": "anchor",
+      "sort_order": 80,
+      "options": [
+        {
+          "option_key": "future_standing",
+          "label": "The future has standing; postponing costs is a form of extraction from people who cannot vote yet.",
+          "dimension_scores": { "globalism": 2, "pragmatism": 2, "solidarity": 1, "reform": 1 },
+          "animal_scores": { "whale": 2, "dolphin": 1, "beaver": 1 },
+          "updown_scores": { "institutional_causality": 1, "narrative_skepticism": 1 }
+        },
+        {
+          "option_key": "maintenance_state",
+          "label": "Build boring audit, procurement, staffing, and maintenance capacity before disaster makes everything expensive.",
+          "dimension_scores": { "pragmatism": 2, "order": 1, "reform": 1 },
+          "animal_scores": { "beaver": 2, "bat": 1, "whale": 1 },
+          "updown_scores": { "institutional_causality": 2, "reform_literacy": 1 }
+        },
+        {
+          "option_key": "local_adaptation",
+          "label": "Let local regions design adaptation plans that fit their land, water, and community knowledge.",
+          "dimension_scores": { "localism": 2, "pragmatism": 1, "tradition": 1 },
+          "animal_scores": { "moose": 2, "dog": 1, "whale": 1 },
+          "updown_scores": { "traceability": 0.5 }
+        },
+        {
+          "option_key": "anti_profiteering",
+          "label": "Prevent resilience spending from becoming a contractor, consultant, or utility-profit feeding trough.",
+          "dimension_scores": { "skepticism": 2, "reform": 1, "pragmatism": 1 },
+          "animal_scores": { "raccoon": 2, "beaver": 1, "coyote": 1 },
+          "updown_scores": { "traceability": 2, "disclosure_preference": 1, "institutional_causality": 1 }
+        },
+        {
+          "option_key": "protect_households",
+          "label": "Tie resilience spending to household protection so poor communities are not sacrificed first.",
+          "dimension_scores": { "solidarity": 2, "equality": 2, "pragmatism": 1 },
+          "animal_scores": { "bison": 2, "otter": 1, "whale": 1 },
+          "updown_scores": { "institutional_causality": 1 }
+        }
+      ]
+    },
+    {
+      "question_key": "q09_labor_strike",
+      "prompt": "A nationwide logistics strike disrupts essential goods. Workers cite unsafe conditions and stagnant pay; businesses warn of cascading shortages. What response is most legitimate?",
+      "context": "This item reveals how you balance order, solidarity, markets, and institutional reform.",
+      "question_type": "single_choice",
+      "required": true,
+      "active": true,
+      "pack": "core_v1",
+      "domain": "labor_markets",
+      "role": "anchor",
+      "sort_order": 90,
+      "options": [
+        {
+          "option_key": "mediate_essentials",
+          "label": "Require immediate mediation and temporary back-to-work measures for truly critical goods.",
+          "dimension_scores": { "order": 2, "pragmatism": 1, "solidarity": 1 },
+          "animal_scores": { "wolf": 2, "beaver": 1, "badger": 1 },
+          "updown_scores": { "reform_literacy": 0.5 }
+        },
+        {
+          "option_key": "protect_strike",
+          "label": "Protect strike rights while using emergency support to shield households from shortages.",
+          "dimension_scores": { "liberty": 1, "solidarity": 2, "equality": 1 },
+          "animal_scores": { "bison": 2, "fox": 1, "dog": 1 },
+          "updown_scores": { "cross_partisan_consistency": 0.5 }
+        },
+        {
+          "option_key": "market_adjustment",
+          "label": "Let markets absorb the disruption; forced settlements can hide deeper inefficiency.",
+          "dimension_scores": { "liberty": 2, "pragmatism": 1, "order": -1 },
+          "animal_scores": { "fox": 2, "wild_horse": 1, "bat": 1 },
+          "updown_scores": { "institutional_causality": 0.5 }
+        },
+        {
+          "option_key": "modernize_labor",
+          "label": "Use the crisis to modernize labor law, bargaining power, safety enforcement, and supply-chain resilience.",
+          "dimension_scores": { "reform": 2, "equality": 2, "solidarity": 1, "pragmatism": 1 },
+          "animal_scores": { "coyote": 1, "bison": 2, "beaver": 1 },
+          "updown_scores": { "reform_literacy": 2, "institutional_causality": 1 }
+        },
+        {
+          "option_key": "audit_incentives",
+          "label": "Audit executive pay, subcontracting, safety records, donor influence, and chokepoint ownership before blaming workers.",
+          "dimension_scores": { "skepticism": 2, "pragmatism": 2, "equality": 1 },
+          "animal_scores": { "raccoon": 2, "bat": 1, "badger": 1 },
+          "updown_scores": { "traceability": 2, "institutional_causality": 2 }
+        }
+      ]
+    },
+    {
+      "question_key": "q10_election_reform",
+      "prompt": "Many citizens believe the two-party system no longer represents them. Reformers propose open primaries, ranked-choice voting, independent redistricting, and public financing. What is your instinct?",
+      "context": "This item maps reform literacy, independence, procedure, and anti-capture intensity.",
+      "question_type": "single_choice",
+      "required": true,
+      "active": true,
+      "pack": "core_v1",
+      "domain": "democratic_rules",
+      "role": "anchor",
+      "sort_order": 100,
+      "options": [
+        {
+          "option_key": "open_system",
+          "label": "Open the system; party machines should not own voter choices.",
+          "dimension_scores": { "liberty": 2, "reform": 2, "skepticism": 1 },
+          "animal_scores": { "wild_horse": 2, "coyote": 1, "fox": 1 },
+          "updown_scores": { "reform_literacy": 2, "narrative_skepticism": 1 }
+        },
+        {
+          "option_key": "rules_first",
+          "label": "Reform carefully with clear rules, auditability, and voter education before changing election machinery.",
+          "dimension_scores": { "order": 1, "pragmatism": 2, "reform": 1 },
+          "animal_scores": { "badger": 2, "beaver": 2, "bat": 1 },
+          "updown_scores": { "reform_literacy": 1, "disclosure_preference": 1 }
+        },
+        {
+          "option_key": "local_control",
+          "label": "Let states and localities experiment; national one-size-fits-all reform can backfire.",
+          "dimension_scores": { "localism": 2, "sovereignty": 1, "pragmatism": 1 },
+          "animal_scores": { "moose": 2, "bear": 1, "dog": 1 },
+          "updown_scores": { "reform_literacy": 1 }
+        },
+        {
+          "option_key": "public_finance",
+          "label": "Prioritize public financing and donor transparency so ordinary voters are not drowned out.",
+          "dimension_scores": { "equality": 2, "reform": 2, "skepticism": 1 },
+          "animal_scores": { "bison": 1, "raccoon": 2, "badger": 1 },
+          "updown_scores": { "disclosure_preference": 2, "traceability": 1, "reform_literacy": 2 }
+        },
+        {
+          "option_key": "civic_trust",
+          "label": "Reforms will fail unless civic trust, local news, and cross-party legitimacy are rebuilt.",
+          "dimension_scores": { "pluralism": 2, "solidarity": 1, "localism": 1, "pragmatism": 1 },
+          "animal_scores": { "otter": 2, "dog": 2, "beaver": 1 },
+          "updown_scores": { "narrative_skepticism": 1 }
+        }
+      ]
+    },
+    {
+      "question_key": "q11_foreign_influence",
+      "prompt": "A foreign-linked investment group is buying strategic land, data infrastructure, and media assets through complicated intermediaries. Everything appears legal. What should happen?",
+      "context": "The Bestiary distinguishes sovereignty from fear and anti-capture from conspiracy.",
+      "question_type": "single_choice",
+      "required": true,
+      "active": true,
+      "pack": "core_v1",
+      "domain": "foreign_influence",
+      "role": "anchor",
+      "sort_order": 110,
+      "options": [
+        {
+          "option_key": "beneficial_owner",
+          "label": "Require beneficial-ownership disclosure, foreign-agent review, and public reporting of strategic holdings.",
+          "dimension_scores": { "sovereignty": 2, "skepticism": 2, "order": 1 },
+          "animal_scores": { "bear": 2, "raccoon": 2, "badger": 1 },
+          "updown_scores": { "traceability": 2, "disclosure_preference": 2, "institutional_causality": 1 }
+        },
+        {
+          "option_key": "targeted_security",
+          "label": "Block ownership only where clear national-security risks exist, not because foreignness itself is suspicious.",
+          "dimension_scores": { "sovereignty": 2, "order": 1, "pragmatism": 1, "pluralism": 1 },
+          "animal_scores": { "bear": 2, "badger": 1, "otter": 1 },
+          "updown_scores": { "cross_partisan_consistency": 1, "disclosure_preference": 1 }
+        },
+        {
+          "option_key": "global_rules",
+          "label": "Build reciprocal international transparency rules so open societies are not uniquely vulnerable.",
+          "dimension_scores": { "globalism": 2, "pragmatism": 1, "order": 1 },
+          "animal_scores": { "dolphin": 2, "whale": 1, "badger": 1 },
+          "updown_scores": { "reform_literacy": 1, "disclosure_preference": 1 }
+        },
+        {
+          "option_key": "local_harm",
+          "label": "Ask local communities what ownership changes are doing to land, rents, news, jobs, and accountability.",
+          "dimension_scores": { "localism": 2, "solidarity": 1, "sovereignty": 1 },
+          "animal_scores": { "moose": 2, "dog": 1, "bear": 1 },
+          "updown_scores": { "traceability": 1, "institutional_causality": 1 }
+        },
+        {
+          "option_key": "avoid_panic",
+          "label": "Avoid panic narratives; investigate documents and incentives before assuming hostile intent.",
+          "dimension_scores": { "pragmatism": 2, "pluralism": 1, "skepticism": 1 },
+          "animal_scores": { "bat": 2, "otter": 1, "raccoon": 1 },
+          "updown_scores": { "narrative_skepticism": 2, "cross_partisan_consistency": 1 }
+        }
+      ]
+    },
+    {
+      "question_key": "q12_ai_public_life",
+      "prompt": "AI tools are reshaping news, campaigns, schools, work, surveillance, and public administration faster than law can adapt. What should democratic institutions prioritize first?",
+      "context": "This scenario introduces future Bestiary expansion while staying inside the core civic map.",
+      "question_type": "single_choice",
+      "required": true,
+      "active": true,
+      "pack": "core_v1",
+      "domain": "technology_power",
+      "role": "anchor",
+      "sort_order": 120,
+      "options": [
+        {
+          "option_key": "auditability",
+          "label": "Require audit trails, model provenance, public-sector impact reviews, and independent testing.",
+          "dimension_scores": { "pragmatism": 2, "skepticism": 1, "order": 1, "reform": 1 },
+          "animal_scores": { "bat": 2, "beaver": 2, "badger": 1 },
+          "updown_scores": { "traceability": 2, "institutional_causality": 1, "disclosure_preference": 1 }
+        },
+        {
+          "option_key": "rights_against_surveillance",
+          "label": "Protect speech, privacy, due process, and the right to exit automated systems.",
+          "dimension_scores": { "liberty": 2, "skepticism": 1, "reform": 1 },
+          "animal_scores": { "fox": 2, "badger": 1, "wild_horse": 1 },
+          "updown_scores": { "cross_partisan_consistency": 1, "reform_literacy": 1 }
+        },
+        {
+          "option_key": "worker_floor",
+          "label": "Build worker transition, education, bargaining, and public-good protections before disruption becomes abandonment.",
+          "dimension_scores": { "solidarity": 2, "equality": 2, "reform": 1 },
+          "animal_scores": { "bison": 2, "dog": 1, "whale": 1 },
+          "updown_scores": { "institutional_causality": 1, "reform_literacy": 1 }
+        },
+        {
+          "option_key": "strategic_capacity",
+          "label": "Treat AI capacity as strategic infrastructure that democratic nations cannot outsource blindly.",
+          "dimension_scores": { "sovereignty": 2, "order": 1, "pragmatism": 1 },
+          "animal_scores": { "bear": 2, "wolf": 1, "whale": 1 },
+          "updown_scores": { "institutional_causality": 1 }
+        },
+        {
+          "option_key": "global_safety",
+          "label": "Coordinate across borders on safety standards, compute governance, and catastrophic-risk prevention.",
+          "dimension_scores": { "globalism": 2, "pragmatism": 1, "solidarity": 1 },
+          "animal_scores": { "dolphin": 2, "whale": 2, "bat": 1 },
+          "updown_scores": { "reform_literacy": 1, "disclosure_preference": 1 }
+        },
+        {
+          "option_key": "follow_incentives",
+          "label": "Map who owns the models, data, chips, ad markets, lobbying shops, and procurement channels.",
+          "dimension_scores": { "skepticism": 2, "reform": 1, "pragmatism": 1 },
+          "animal_scores": { "raccoon": 2, "coyote": 1, "bat": 1 },
+          "updown_scores": { "traceability": 2, "institutional_causality": 2, "narrative_skepticism": 1 }
+        }
+      ]
+    }
+  ]
+}

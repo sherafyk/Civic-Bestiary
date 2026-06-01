@@ -1,0 +1,68 @@
+.acb-admin .acb-admin-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem 1.25rem;
+}
+.acb-admin-grid--stats {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin: 1rem 0;
+}
+.acb-admin-panel,
+.acb-stat {
+    background: #fff;
+    border: 1px solid #dcdcde;
+    border-radius: 16px;
+    padding: 1rem 1.25rem;
+    margin: 1rem 0;
+}
+.acb-stat {
+    display: grid;
+    gap: .45rem;
+}
+.acb-stat strong { font-size: 1.6rem; }
+.acb-button-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .75rem;
+}
+.acb-options-table textarea,
+.acb-options-table input[type="text"] {
+    width: 100%;
+}
+.acb-icon-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 1rem;
+}
+.acb-icon-card {
+    margin: 0;
+    text-align: center;
+    padding: .75rem;
+    border: 1px solid #dcdcde;
+    border-radius: 14px;
+    background: #f8fafc;
+}
+.acb-icon-card img {
+    width: 100%;
+    max-width: 128px;
+    margin: 0 auto .5rem;
+    border-radius: 16px;
+}
+.acb-icon-card figcaption {
+    display: grid;
+    gap: .2rem;
+}
+.acb-profile-detail__head {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+.acb-profile-detail__head img {
+    width: 88px;
+    border-radius: 16px;
+}
+@media (max-width: 900px) {
+    .acb-admin .acb-admin-grid,
+    .acb-admin-grid--stats { grid-template-columns: 1fr; }
+}
