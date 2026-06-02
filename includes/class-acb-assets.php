@@ -32,6 +32,12 @@ final class ACB_Assets
         if (!empty($settings['panel_shadow']) && 'none' !== $settings['panel_shadow']) {
             $classes[] = 'acb-shell--shadow-' . sanitize_html_class($settings['panel_shadow']);
         }
+        if (!empty($settings['compact_mode'])) {
+            $classes[] = 'acb-shell--compact';
+        }
+        if (!empty($settings['report_layout_mode'])) {
+            $classes[] = 'acb-shell--layout-' . sanitize_html_class($settings['report_layout_mode']);
+        }
 
         $classes = apply_filters('acb_wrapper_classes', $classes, $settings, $context);
         $style = self::style_variables($settings);
@@ -65,6 +71,11 @@ final class ACB_Assets
         $radius = absint($settings['border_radius'] ?? 0);
         if ($radius > 0) {
             $vars[] = '--acb-radius:' . $radius . 'px';
+        }
+
+        $max_width = trim((string) ($settings['report_max_width'] ?? ''));
+        if ('' !== $max_width && preg_match('/^\d+(px|rem|em|%)$/', $max_width)) {
+            $vars[] = '--acb-max-width:' . $max_width;
         }
 
         $shadow_value = self::shadow_value($settings['panel_shadow'] ?? 'medium');

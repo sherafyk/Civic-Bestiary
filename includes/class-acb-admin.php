@@ -218,6 +218,28 @@ final class ACB_Admin
                             <td><input id="questions_per_session" type="number" min="1" name="settings[questions_per_session]" value="<?php echo esc_attr((int) $settings['questions_per_session']); ?>"></td>
                         </tr>
                         <tr>
+                            <th scope="row"><label for="report_position"><?php esc_html_e('Report position after unlock', 'american-civic-bestiary'); ?></label></th>
+                            <td>
+                                <select id="report_position" name="settings[report_position]">
+                                    <option value="before_form" <?php selected($settings['report_position'] ?? 'before_form', 'before_form'); ?>><?php esc_html_e('Report before refinement questions', 'american-civic-bestiary'); ?></option>
+                                    <option value="after_form" <?php selected($settings['report_position'] ?? 'before_form', 'after_form'); ?>><?php esc_html_e('Report after question form', 'american-civic-bestiary'); ?></option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><label for="refine_display"><?php esc_html_e('Refinement question display', 'american-civic-bestiary'); ?></label></th>
+                            <td>
+                                <select id="refine_display" name="settings[refine_display]">
+                                    <option value="button" <?php selected($settings['refine_display'] ?? 'button', 'button'); ?>><?php esc_html_e('Behind a button/details control', 'american-civic-bestiary'); ?></option>
+                                    <option value="automatic" <?php selected($settings['refine_display'] ?? 'button', 'automatic'); ?>><?php esc_html_e('Show automatically below the report', 'american-civic-bestiary'); ?></option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><?php esc_html_e('Retakes', 'american-civic-bestiary'); ?></th>
+                            <td><label><input type="checkbox" name="settings[allow_retakes]" value="1" <?php checked(!empty($settings['allow_retakes'])); ?>> <?php esc_html_e('Allow already-answered questions to be resubmitted from stale forms', 'american-civic-bestiary'); ?></label></td>
+                        </tr>
+                        <tr>
                             <th scope="row"><?php esc_html_e('Identity fields', 'american-civic-bestiary'); ?></th>
                             <td>
                                 <label><input type="checkbox" name="settings[show_name_field]" value="1" <?php checked(!empty($settings['show_name_field'])); ?>> <?php esc_html_e('Show name field', 'american-civic-bestiary'); ?></label><br>
@@ -255,6 +277,10 @@ final class ACB_Admin
                             <td><textarea id="dashboard_intro" class="large-text" rows="3" name="settings[dashboard_intro]"><?php echo esc_textarea($settings['dashboard_intro']); ?></textarea><p class="description"><?php esc_html_e('Leave blank to use the profile animal summary automatically.', 'american-civic-bestiary'); ?></p></td>
                         </tr>
                         <tr>
+                            <th scope="row"><label for="dashboard_outro"><?php esc_html_e('Report outro copy', 'american-civic-bestiary'); ?></label></th>
+                            <td><textarea id="dashboard_outro" class="large-text" rows="3" name="settings[dashboard_outro]"><?php echo esc_textarea($settings['dashboard_outro'] ?? ''); ?></textarea></td>
+                        </tr>
+                        <tr>
                             <th scope="row"><label for="cta_label"><?php esc_html_e('Optional call-to-action label', 'american-civic-bestiary'); ?></label></th>
                             <td><input id="cta_label" class="regular-text" type="text" name="settings[cta_label]" value="<?php echo esc_attr($settings['cta_label']); ?>"></td>
                         </tr>
@@ -272,13 +298,31 @@ final class ACB_Admin
                             <th scope="row"><?php esc_html_e('Display options', 'american-civic-bestiary'); ?></th>
                             <td>
                                 <label><input type="checkbox" name="settings[show_icons]" value="1" <?php checked(!empty($settings['show_icons'])); ?>> <?php esc_html_e('Show bundled animal icons in report cards', 'american-civic-bestiary'); ?></label><br>
+                                <label><input type="checkbox" name="settings[show_primary_secondary_cards]" value="1" <?php checked(!empty($settings['show_primary_secondary_cards'])); ?>> <?php esc_html_e('Show primary/secondary animal cards', 'american-civic-bestiary'); ?></label><br>
+                                <label><input type="checkbox" name="settings[show_dimension_bars]" value="1" <?php checked(!empty($settings['show_dimension_bars'])); ?>> <?php esc_html_e('Show civic dimension bars', 'american-civic-bestiary'); ?></label><br>
                                 <label><input type="checkbox" name="settings[show_house_scores]" value="1" <?php checked(!empty($settings['show_house_scores'])); ?>> <?php esc_html_e('Show house alignment scores', 'american-civic-bestiary'); ?></label><br>
-                                <label><input type="checkbox" name="settings[show_capture_overlay]" value="1" <?php checked(!empty($settings['show_capture_overlay'])); ?>> <?php esc_html_e('Show capture-literacy overlay', 'american-civic-bestiary'); ?></label>
+                                <label><input type="checkbox" name="settings[show_capture_overlay]" value="1" <?php checked(!empty($settings['show_capture_overlay'])); ?>> <?php esc_html_e('Show capture-literacy overlay', 'american-civic-bestiary'); ?></label><br>
+                                <label><input type="checkbox" name="settings[compact_mode]" value="1" <?php checked(!empty($settings['compact_mode'])); ?>> <?php esc_html_e('Compact mode for narrow containers', 'american-civic-bestiary'); ?></label>
                             </td>
                         </tr>
                         <tr>
                             <th scope="row"><label for="top_match_count"><?php esc_html_e('Top animal matches to show', 'american-civic-bestiary'); ?></label></th>
-                            <td><input id="top_match_count" type="number" min="3" max="16" name="settings[top_match_count]" value="<?php echo esc_attr((int) $settings['top_match_count']); ?>"></td>
+                            <td><input id="top_match_count" type="number" min="1" max="16" name="settings[top_match_count]" value="<?php echo esc_attr((int) $settings['top_match_count']); ?>"></td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><label for="report_layout_mode"><?php esc_html_e('Report layout mode', 'american-civic-bestiary'); ?></label></th>
+                            <td>
+                                <select id="report_layout_mode" name="settings[report_layout_mode]">
+                                    <option value="auto" <?php selected($settings['report_layout_mode'] ?? 'auto', 'auto'); ?>><?php esc_html_e('Auto / responsive', 'american-civic-bestiary'); ?></option>
+                                    <option value="single" <?php selected($settings['report_layout_mode'] ?? 'auto', 'single'); ?>><?php esc_html_e('Single column', 'american-civic-bestiary'); ?></option>
+                                    <option value="two" <?php selected($settings['report_layout_mode'] ?? 'auto', 'two'); ?>><?php esc_html_e('Two columns', 'american-civic-bestiary'); ?></option>
+                                    <option value="three" <?php selected($settings['report_layout_mode'] ?? 'auto', 'three'); ?>><?php esc_html_e('Three columns', 'american-civic-bestiary'); ?></option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><label for="report_max_width"><?php esc_html_e('Maximum report width', 'american-civic-bestiary'); ?></label></th>
+                            <td><input id="report_max_width" class="regular-text" type="text" name="settings[report_max_width]" placeholder="960px" value="<?php echo esc_attr($settings['report_max_width'] ?? ''); ?>"><p class="description"><?php esc_html_e('Optional CSS length, such as 760px, 64rem, or 100%.', 'american-civic-bestiary'); ?></p></td>
                         </tr>
                     </table>
                 </section>

@@ -1,4 +1,15 @@
 <?php if (!defined('ABSPATH')) { exit; } ?>
+<?php
+$layout_mode = sanitize_key($settings['report_layout_mode'] ?? 'auto');
+$grid_class = 'acb-grid--auto';
+if ('single' === $layout_mode) {
+    $grid_class = 'acb-grid--single';
+} elseif ('two' === $layout_mode) {
+    $grid_class = 'acb-grid--two';
+} elseif ('three' === $layout_mode) {
+    $grid_class = 'acb-grid--three';
+}
+?>
 <section class="acb-dashboard">
     <div class="acb-result-head acb-panel">
         <div class="acb-result-head__copy">
@@ -22,40 +33,42 @@
     </div>
 
     <?php if ($minimum_met) : ?>
-        <div class="acb-grid acb-grid--three">
-            <article class="acb-panel acb-profile-card">
-                <?php if (!empty($settings['show_icons']) && $primary_icon) : ?>
-                    <img class="acb-profile-card__icon" src="<?php echo esc_url($primary_icon); ?>" alt="<?php echo esc_attr($primary['label'] ?? ''); ?>">
-                <?php endif; ?>
-                <div>
-                    <h3><?php echo esc_html($primary['label'] ?? ''); ?></h3>
-                    <p class="acb-kicker"><?php echo esc_html($primary['title'] ?? ''); ?></p>
-                    <p><?php echo esc_html($primary['gift'] ?? ''); ?></p>
-                    <?php if (!empty($primary['motto'])) : ?><p class="acb-muted"><em><?php echo esc_html($primary['motto']); ?></em></p><?php endif; ?>
-                </div>
-            </article>
-            <article class="acb-panel acb-profile-card">
-                <?php if (!empty($settings['show_icons']) && $secondary_icon) : ?>
-                    <img class="acb-profile-card__icon" src="<?php echo esc_url($secondary_icon); ?>" alt="<?php echo esc_attr($secondary['label'] ?? ''); ?>">
-                <?php endif; ?>
-                <div>
-                    <h3><?php echo esc_html($secondary['label'] ?? ''); ?></h3>
-                    <p class="acb-kicker"><?php echo esc_html($secondary['title'] ?? ''); ?></p>
-                    <p><?php echo esc_html($secondary['gift'] ?? ''); ?></p>
-                    <?php if (!empty($secondary['motto'])) : ?><p class="acb-muted"><em><?php echo esc_html($secondary['motto']); ?></em></p><?php endif; ?>
-                </div>
-            </article>
-            <article class="acb-panel acb-profile-card">
-                <div>
-                    <h3><?php echo esc_html($house['label'] ?? ''); ?></h3>
-                    <p class="acb-kicker"><?php echo esc_html($blend['label'] ?? ''); ?></p>
-                    <p><?php echo esc_html($house['instinct'] ?? ''); ?></p>
-                    <?php if (!empty($primary['danger'])) : ?><p class="acb-muted"><strong><?php esc_html_e('Watch-out:', 'american-civic-bestiary'); ?></strong> <?php echo esc_html($primary['danger']); ?></p><?php endif; ?>
-                </div>
-            </article>
-        </div>
+        <?php if (!empty($settings['show_primary_secondary_cards'])) : ?>
+            <div class="acb-grid <?php echo esc_attr($grid_class); ?>">
+                <article class="acb-panel acb-profile-card">
+                    <?php if (!empty($settings['show_icons']) && $primary_icon) : ?>
+                        <img class="acb-profile-card__icon" src="<?php echo esc_url($primary_icon); ?>" alt="<?php echo esc_attr($primary['label'] ?? ''); ?>">
+                    <?php endif; ?>
+                    <div>
+                        <h3><?php echo esc_html($primary['label'] ?? ''); ?></h3>
+                        <p class="acb-kicker"><?php echo esc_html($primary['title'] ?? ''); ?></p>
+                        <p><?php echo esc_html($primary['gift'] ?? ''); ?></p>
+                        <?php if (!empty($primary['motto'])) : ?><p class="acb-muted"><em><?php echo esc_html($primary['motto']); ?></em></p><?php endif; ?>
+                    </div>
+                </article>
+                <article class="acb-panel acb-profile-card">
+                    <?php if (!empty($settings['show_icons']) && $secondary_icon) : ?>
+                        <img class="acb-profile-card__icon" src="<?php echo esc_url($secondary_icon); ?>" alt="<?php echo esc_attr($secondary['label'] ?? ''); ?>">
+                    <?php endif; ?>
+                    <div>
+                        <h3><?php echo esc_html($secondary['label'] ?? ''); ?></h3>
+                        <p class="acb-kicker"><?php echo esc_html($secondary['title'] ?? ''); ?></p>
+                        <p><?php echo esc_html($secondary['gift'] ?? ''); ?></p>
+                        <?php if (!empty($secondary['motto'])) : ?><p class="acb-muted"><em><?php echo esc_html($secondary['motto']); ?></em></p><?php endif; ?>
+                    </div>
+                </article>
+                <article class="acb-panel acb-profile-card">
+                    <div>
+                        <h3><?php echo esc_html($house['label'] ?? ''); ?></h3>
+                        <p class="acb-kicker"><?php echo esc_html($blend['label'] ?? ''); ?></p>
+                        <p><?php echo esc_html($house['instinct'] ?? ''); ?></p>
+                        <?php if (!empty($primary['danger'])) : ?><p class="acb-muted"><strong><?php esc_html_e('Watch-out:', 'american-civic-bestiary'); ?></strong> <?php echo esc_html($primary['danger']); ?></p><?php endif; ?>
+                    </div>
+                </article>
+            </div>
+        <?php endif; ?>
 
-        <div class="acb-grid acb-grid--two">
+        <div class="acb-grid <?php echo esc_attr('single' === $layout_mode ? 'acb-grid--single' : 'acb-grid--two'); ?>">
             <article class="acb-panel">
                 <h3><?php esc_html_e('Profile interpretation', 'american-civic-bestiary'); ?></h3>
                 <ul class="acb-bullets">
@@ -70,28 +83,41 @@
                 <?php echo $animal_bars; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
             </article>
         </div>
-    <?php endif; ?>
 
-    <div class="acb-grid acb-grid--two">
-        <article class="acb-panel">
-            <h3><?php esc_html_e('Twelve-dimension civic spectrum', 'american-civic-bestiary'); ?></h3>
-            <?php echo $dimension_bars; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-        </article>
-        <?php if (!empty($settings['show_house_scores'])) : ?>
-            <article class="acb-panel">
-                <h3><?php esc_html_e('House alignment', 'american-civic-bestiary'); ?></h3>
-                <?php echo $house_bars; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-            </article>
+        <?php if (!empty($settings['show_dimension_bars'])) : ?>
+            <div class="acb-grid <?php echo esc_attr('single' === $layout_mode ? 'acb-grid--single' : 'acb-grid--two'); ?>">
+                <article class="acb-panel">
+                    <h3><?php esc_html_e('Civic dimensions', 'american-civic-bestiary'); ?></h3>
+                    <?php echo $dimension_bars; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+                </article>
+                <?php if (!empty($settings['show_house_scores'])) : ?>
+                    <article class="acb-panel">
+                        <h3><?php esc_html_e('House alignment', 'american-civic-bestiary'); ?></h3>
+                        <?php echo $house_bars; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+                    </article>
+                <?php endif; ?>
+            </div>
+        <?php elseif (!empty($settings['show_house_scores'])) : ?>
+            <div class="acb-grid acb-grid--single">
+                <article class="acb-panel">
+                    <h3><?php esc_html_e('House alignment', 'american-civic-bestiary'); ?></h3>
+                    <?php echo $house_bars; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+                </article>
+            </div>
         <?php endif; ?>
-    </div>
 
-    <?php if (!empty($settings['show_capture_overlay'])) : ?>
-        <div class="acb-grid acb-grid--single">
-            <article class="acb-panel">
-                <h3><?php esc_html_e('Capture-literacy overlay', 'american-civic-bestiary'); ?></h3>
-                <p class="acb-kicker"><?php echo esc_html($result['updown']['band']['label'] ?? ''); ?></p>
-                <?php echo $capture_bars; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-            </article>
-        </div>
+        <?php if (!empty($settings['show_capture_overlay'])) : ?>
+            <div class="acb-grid acb-grid--single">
+                <article class="acb-panel">
+                    <h3><?php esc_html_e('Capture-literacy overlay', 'american-civic-bestiary'); ?></h3>
+                    <p class="acb-kicker"><?php echo esc_html($result['updown']['band']['label'] ?? ''); ?></p>
+                    <?php echo $capture_bars; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+                </article>
+            </div>
+        <?php endif; ?>
+
+        <?php if (!empty($dashboard_outro)) : ?>
+            <div class="acb-panel acb-report-outro"><p><?php echo esc_html($dashboard_outro); ?></p></div>
+        <?php endif; ?>
     <?php endif; ?>
 </section>

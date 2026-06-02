@@ -20,7 +20,23 @@ final class ACB_Repository
             $shadow = $defaults['panel_shadow'];
         }
 
-        $top_match_count = max(3, min(16, absint($settings['top_match_count'] ?? $defaults['top_match_count'])));
+        $top_match_count = max(1, min(16, absint($settings['top_match_count'] ?? $defaults['top_match_count'])));
+        $layout_mode = sanitize_key($settings['report_layout_mode'] ?? $defaults['report_layout_mode']);
+        if (!in_array($layout_mode, array('auto', 'single', 'two', 'three'), true)) {
+            $layout_mode = $defaults['report_layout_mode'];
+        }
+        $report_position = sanitize_key($settings['report_position'] ?? $defaults['report_position']);
+        if (!in_array($report_position, array('before_form', 'after_form'), true)) {
+            $report_position = $defaults['report_position'];
+        }
+        $refine_display = sanitize_key($settings['refine_display'] ?? $defaults['refine_display']);
+        if (!in_array($refine_display, array('button', 'automatic'), true)) {
+            $refine_display = $defaults['refine_display'];
+        }
+        $report_max_width = trim((string) ($settings['report_max_width'] ?? $defaults['report_max_width']));
+        if ('' !== $report_max_width && !preg_match('/^\d+(px|rem|em|%)$/', $report_max_width)) {
+            $report_max_width = $defaults['report_max_width'];
+        }
         $clean = array(
             'minimum_questions' => max(1, absint($settings['minimum_questions'] ?? $defaults['minimum_questions'])),
             'questions_per_session' => max(1, absint($settings['questions_per_session'] ?? $defaults['questions_per_session'])),
@@ -33,9 +49,18 @@ final class ACB_Repository
             'assessment_intro' => sanitize_textarea_field($settings['assessment_intro'] ?? $defaults['assessment_intro']),
             'dashboard_eyebrow' => sanitize_text_field($settings['dashboard_eyebrow'] ?? $defaults['dashboard_eyebrow']),
             'dashboard_intro' => sanitize_textarea_field($settings['dashboard_intro'] ?? $defaults['dashboard_intro']),
+            'dashboard_outro' => sanitize_textarea_field($settings['dashboard_outro'] ?? $defaults['dashboard_outro']),
+            'report_layout_mode' => $layout_mode,
+            'report_max_width' => sanitize_text_field($report_max_width),
+            'report_position' => $report_position,
+            'refine_display' => $refine_display,
+            'allow_retakes' => !empty($settings['allow_retakes']),
             'show_icons' => !empty($settings['show_icons']),
             'show_house_scores' => !empty($settings['show_house_scores']),
             'show_capture_overlay' => !empty($settings['show_capture_overlay']),
+            'show_dimension_bars' => !empty($settings['show_dimension_bars']),
+            'show_primary_secondary_cards' => !empty($settings['show_primary_secondary_cards']),
+            'compact_mode' => !empty($settings['compact_mode']),
             'top_match_count' => $top_match_count,
             'cta_label' => sanitize_text_field($settings['cta_label'] ?? $defaults['cta_label']),
             'cta_url' => esc_url_raw($settings['cta_url'] ?? $defaults['cta_url']),
@@ -241,14 +266,29 @@ final class ACB_Repository
             $profile_row = $wpdb->get_row($wpdb->prepare("SELECT * FROM {$table} WHERE profile_key = %s LIMIT 1", $profile_key), ARRAY_A);
         }
 
+        if ($user_id > 0 && $profile_row && !empty($profile_row['user_id']) && (int) $profile_row['user_id'] !== $user_id) {
+            $profile_row = null;
+            $profile_key = $this->profile_key_from_token('user-' . $user_id . '-' . wp_generate_password(24, false, false));
+        }
+
         if ($user_id > 0) {
-            $row = $wpdb->get_row($wpdb->prepare("SELECT * FROM {$table} WHERE user_id = %d ORDER BY updated_at DESC LIMIT 1", $user_id), ARRAY_A);
-            if ($row) {
-                if ($profile_key && $row['profile_key'] !== $profile_key && (!$profile_row || (int) $profile_row['id'] === (int) $row['id'])) {
-                    $wpdb->update($table, array('profile_key' => $profile_key, 'updated_at' => current_time('mysql')), array('id' => (int) $row['id']));
-                    $row['profile_key'] = $profile_key;
+            $user_row = $wpdb->get_row($wpdb->prepare("SELECT * FROM {$table} WHERE user_id = %d ORDER BY updated_at DESC LIMIT 1", $user_id), ARRAY_A);
+
+            if ($user_row) {
+                if ($profile_row && (int) $profile_row['id'] !== (int) $user_row['id']) {
+                    // A logged-in visitor may arrive with an anonymous quiz cookie from before login.
+                    // Merge that cookie-backed profile into the stable user profile, then repoint the
+                    // cookie key so future anonymous-cookie lookups resolve to the same profile.
+                    $this->merge_profiles((int) $profile_row['id'], (int) $user_row['id'], $profile_key);
+                    return $this->get_profile((int) $user_row['id']);
                 }
-                return $this->hydrate_profile($row);
+
+                if ($profile_key && $user_row['profile_key'] !== $profile_key) {
+                    $this->replace_profile_key((int) $user_row['id'], $profile_key);
+                    $user_row = $wpdb->get_row($wpdb->prepare("SELECT * FROM {$table} WHERE id = %d", (int) $user_row['id']), ARRAY_A);
+                }
+
+                return $this->hydrate_profile($user_row);
             }
         }
 
@@ -269,6 +309,94 @@ final class ACB_Repository
         ));
 
         return $this->get_profile((int) $wpdb->insert_id);
+    }
+
+    private function merge_profiles($source_profile_id, $target_profile_id, $target_profile_key = '')
+    {
+        global $wpdb;
+
+        $source_profile_id = (int) $source_profile_id;
+        $target_profile_id = (int) $target_profile_id;
+        if ($source_profile_id <= 0 || $target_profile_id <= 0 || $source_profile_id === $target_profile_id) {
+            return;
+        }
+
+        $profiles = ACB_Schema::table('profiles');
+        $answers = ACB_Schema::table('answers');
+        $snapshots = ACB_Schema::table('snapshots');
+        $source = $this->get_profile($source_profile_id);
+        $target = $this->get_profile($target_profile_id);
+        if (!$source || !$target) {
+            return;
+        }
+
+        $source_answers = $wpdb->get_results($wpdb->prepare(
+            "SELECT * FROM {$answers} WHERE profile_id = %d ORDER BY answered_at ASC, id ASC",
+            $source_profile_id
+        ), ARRAY_A);
+
+        foreach ($source_answers as $answer) {
+            $existing_id = $wpdb->get_var($wpdb->prepare(
+                "SELECT id FROM {$answers} WHERE profile_id = %d AND question_id = %d LIMIT 1",
+                $target_profile_id,
+                (int) $answer['question_id']
+            ));
+
+            if ($existing_id) {
+                continue;
+            }
+
+            unset($answer['id']);
+            $answer['profile_id'] = $target_profile_id;
+            $wpdb->insert($answers, $answer);
+        }
+
+        $identity = array('updated_at' => current_time('mysql'));
+        if (empty($target['respondent_name']) && !empty($source['respondent_name'])) {
+            $identity['respondent_name'] = sanitize_text_field($source['respondent_name']);
+        }
+        if (empty($target['respondent_email']) && !empty($source['respondent_email']) && is_email($source['respondent_email'])) {
+            $identity['respondent_email'] = sanitize_email($source['respondent_email']);
+        }
+
+        $identity['total_answered'] = (int) $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM {$answers} WHERE profile_id = %d", $target_profile_id));
+        $identity['latest_result_json'] = '';
+        $wpdb->update($profiles, $identity, array('id' => $target_profile_id));
+        $wpdb->update($snapshots, array('profile_id' => $target_profile_id), array('profile_id' => $source_profile_id));
+
+        if ($target_profile_key) {
+            $this->replace_profile_key($target_profile_id, $target_profile_key, $source_profile_id);
+        }
+
+        $wpdb->delete($answers, array('profile_id' => $source_profile_id));
+        $wpdb->delete($profiles, array('id' => $source_profile_id));
+    }
+
+    private function replace_profile_key($profile_id, $profile_key, $known_conflict_id = 0)
+    {
+        global $wpdb;
+
+        $profile_id = (int) $profile_id;
+        $profile_key = sanitize_text_field($profile_key);
+        if ($profile_id <= 0 || !$profile_key) {
+            return;
+        }
+
+        $profiles = ACB_Schema::table('profiles');
+        $conflict = (int) $wpdb->get_var($wpdb->prepare(
+            "SELECT id FROM {$profiles} WHERE profile_key = %s AND id <> %d LIMIT 1",
+            $profile_key,
+            $profile_id
+        ));
+
+        if ($conflict > 0) {
+            $wpdb->update($profiles, array(
+                'profile_key' => 'merged-' . $conflict . '-' . wp_generate_password(20, false, false),
+                'updated_at' => current_time('mysql'),
+            ), array('id' => $known_conflict_id ? (int) $known_conflict_id : $conflict));
+        }
+
+        $wpdb->update($profiles, array('profile_key' => $profile_key, 'updated_at' => current_time('mysql')), array('id' => $profile_id));
     }
 
     public function update_profile_identity($profile_id, $name, $email)
