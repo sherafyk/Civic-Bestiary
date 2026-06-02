@@ -1,10 +1,10 @@
 <?php if (!defined('ABSPATH')) { exit; } ?>
-<form class="acb-form" method="post">
+<form class="acb-form acb-form--<?php echo esc_attr($flow_stage ?? 'initial'); ?>" method="post">
     <div class="acb-form__header">
         <?php if (!empty($settings['assessment_eyebrow'])) : ?>
             <p class="acb-eyebrow"><?php echo esc_html($settings['assessment_eyebrow']); ?></p>
         <?php endif; ?>
-        <h2><?php echo esc_html($settings['assessment_title'] ?: __('Answer the next civic scenarios', 'american-civic-bestiary')); ?></h2>
+        <h2><?php echo esc_html('refine' === ($flow_stage ?? '') ? __('Refinement scenarios', 'american-civic-bestiary') : ($settings['assessment_title'] ?: __('Answer the next civic scenarios', 'american-civic-bestiary'))); ?></h2>
         <?php if (!empty($settings['assessment_intro'])) : ?>
             <p class="acb-lead"><?php echo esc_html($settings['assessment_intro']); ?></p>
         <?php endif; ?>
@@ -45,6 +45,6 @@
     <?php wp_nonce_field('acb_submit_questions', '_acb_nonce'); ?>
 
     <div class="acb-form__actions">
-        <button class="acb-button" type="submit"><?php esc_html_e('Update my profile', 'american-civic-bestiary'); ?></button>
+        <button class="acb-button" type="submit"><?php echo esc_html('refine' === ($flow_stage ?? '') ? __('Save refinement answers', 'american-civic-bestiary') : __('Unlock my profile', 'american-civic-bestiary')); ?></button>
     </div>
 </form>
